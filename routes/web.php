@@ -1,7 +1,10 @@
 <?php
 
+use App\Http\Controllers\AuditController;
 use App\Http\Controllers\ProductController;
+use App\Http\Resources\AuditResource;
 use Illuminate\Support\Facades\Route;
+use OwenIt\Auditing\Models\Audit;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,5 +26,9 @@ Route::get('/dashboard', function () {
 })->middleware(['auth'])->name('dashboard');
 
 Route::resource('products', ProductController::class);
+
+/// Audit information API
+Route::get('audit', [AuditController::class, 'dump']);
+Route::get('audit/{from}/{till}', [AuditController::class, 'dump']);
 
 require __DIR__.'/auth.php';
